@@ -13,11 +13,25 @@ datasource db {
 // Tables = Model
 
 model Event {
-  id               String  @id @default(uuid()) // 343e25f7-ae2a-4a78-a54b-c3c2cb02a0aa
+  id               String     @id @default(uuid()) // 343e25f7-ae2a-4a78-a54b-c3c2cb02a0aa
   title            String
   details          String? // ? = optional
-  slug             String  @unique // Representação do título
-  maximumAttendees Int?    @map("maximum_attendees")
+  slug             String     @unique // Representação do título
+  maximumAttendees Int?       @map("maximum_attendees")
+  Attendee         Attendee[]
 
   @@map("events")
+}
+
+model Attendee {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  createdAt DateTime @default(now()) @map("created_at")
+  eventId   String   @map("event_id")
+
+  event Event @relation(fields: [eventId], references: [id])
+
+  @@unique([eventId, email]) // Isso significa que a combinação de valores para os campos eventId e email deve ser única
+  @@map("attendees")
 }
