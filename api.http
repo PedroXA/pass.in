@@ -2,7 +2,25 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-    "title": "Unite Summit",
-    "details": "Um evento apaixonado por programação",
-    "maximumAttendees": 100
+    "title": "NLW UN",
+    "details": "Um evento apaixonado",
+    "maximumAttendees": 3
 }
+
+###
+
+POST http://localhost:3333/events/bc605b3b-d404-486d-9415-461fb599c24b/attendees
+Content-Type: application/json
+
+{
+    "name": "Louro josé",
+    "email": "pedoxad@gmail.com"
+}
+
+###
+
+GET http://localhost:3333/events/bc605b3b-d404-486d-9415-461fb599c24b
+
+###
+
+GET http://localhost:3333/attendees/1/badge
